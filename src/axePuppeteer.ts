@@ -224,12 +224,11 @@ export class AxePuppeteer {
       await injectAxe(this.frame, this.source)
 
       const context = normalizeContext(this.includes, this.excludes)
-      const axeResults = await this.frame.evaluate(
-        runAxe,
+      const axeResults = await this.frame.evaluate(runAxe, [
         this.config as JSONObject,
         context as JSONObject,
         this.axeOptions as JSONObject
-      )
+      ])
 
       if (callback) {
         callback(null, axeResults)
